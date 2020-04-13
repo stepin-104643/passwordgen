@@ -6,6 +6,11 @@ def passwordgen():
     
     password_length=int(input("enter pwd length"))
     
+    if(password_length<6):
+        print("too short! 6 characters minimum")
+        exit()
+    
+    
     nooflettsandnums=int(input("enter no. of letters and nos"))
     
     pwdstring=string.ascii_letters+string.digits
