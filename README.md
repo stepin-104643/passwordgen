@@ -1,6 +1,6 @@
 # passwordgen
 
-The purpose of this code is to generate a password of a user-specified length, along with mixed-case letters, numbers, and special symbols.
+The purpose of this code is to generate a password of a user-specified length (6 characters minimum), along with mixed-case letters, numbers, and special symbols.
 
 The user is also given the liberty to specify exact number of letters and numbers in the password.
 
