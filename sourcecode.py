@@ -37,8 +37,6 @@ def passwordgen(pwLength, noOflettersAndNumbers):
     #now to mix password characters as you do not want patterns
     passwordList = list(permutations(password)) #this is a list
     passwordChoice = random.randrange(0, len(passwordList))
-    print(passwordChoice)
-    #print(passwordList)
     
     password = "".join(passwordList[int(passwordChoice)])
     return password
