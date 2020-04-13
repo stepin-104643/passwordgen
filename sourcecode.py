@@ -4,6 +4,18 @@ import argparse
 import random 
 import string
 
+class ValueTooSmallException(Exception):
+    '''
+    Exception raised if password length is too small
+    '''
+    pass
+
+class ValueExceededException(Exception):
+    '''
+    Exception raised if number of letters and digits is more than password length
+    '''
+    pass
+
 def passwordgen(pwLength, noOflettersAndNumbers):
 
     '''
@@ -20,26 +32,34 @@ def passwordgen(pwLength, noOflettersAndNumbers):
     '''
 
     try:
+        if int(pwLength) < 6:
+            raise ValueTooSmallException
+        if int(noOflettersAndNumbers) > int(pwLength):
+            raise ValueExceededException
+
         password_length=int(pwLength)
         nooflettsandnums=int(noOflettersAndNumbers)
-    except password_length < 6:
-        print("too short! 6 characters minimum")
-    except nooflettsandnums > password_length:
-        print("number of letters and digits cannot be more than password length")
 
-    pwdstring=string.ascii_letters+string.digits
-    password="".join(random.SystemRandom().choice(pwdstring) for i in range(nooflettsandnums))
-    
-    pwdstring=string.punctuation
-    specialchars=password_length-nooflettsandnums
-    password+="".join(random.SystemRandom().choice(pwdstring) for j in range(specialchars))
+        pwdstring=string.ascii_letters+string.digits
+        password="".join(random.SystemRandom().choice(pwdstring) for i in range(nooflettsandnums))
+        
+        pwdstring=string.punctuation
+        specialchars=password_length-nooflettsandnums
+        password+="".join(random.SystemRandom().choice(pwdstring) for j in range(specialchars))
 
-    #now to mix password characters as you do not want patterns
-    passwordList = list(permutations(password)) #this is a list
-    passwordChoice = random.randrange(0, len(passwordList))
-    
-    password = "".join(passwordList[int(passwordChoice)])
-    return password
+        #now to mix password characters as you do not want patterns
+        passwordList = list(permutations(password)) #this is a list
+        passwordChoice = random.randrange(0, len(passwordList))
+        
+        password = "".join(passwordList[int(passwordChoice)])
+        return password
+
+    except ValueTooSmallException:
+        print("ERROR! The password length should be at least 6 characters long")
+        raise 
+    except ValueExceededException:
+        print("ERROR! The number of letters and digits should not exceed password length")
+        raise  
 
 def main():
 
