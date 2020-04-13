@@ -42,6 +42,13 @@ def passwordgen(pwLength, noOflettersAndNumbers):
     return password
 
 def main():
+
+    '''
+    To call the passwordgen() function, used parsed arguments (argparse)
+    For example, if a password of length 9 and number of letters and digits in it should be 6,
+    run "python sourcecode.py --pwlength 9 --lettersnumbers 6" from your Linux shell
+    '''
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--pwlength", dest = "pwlength")
     parser.add_argument("--lettersnumbers", dest = "lettersnumbers")
