@@ -8,13 +8,19 @@ class ValueTooSmallException(Exception):
     '''
     Exception raised if password length is too small
     '''
-    pass
+    def __init__(self, message):
+        self.message = message
+    def __str__(self):
+        return repr(self.message)
 
 class ValueExceededException(Exception):
     '''
     Exception raised if number of letters and digits is more than password length
     '''
-    pass
+    def __init__(self, message):
+        self.message = message
+    def __str__(self):
+        return repr(self.message)
 
 def passwordgen(pwLength, noOflettersAndNumbers):
 
@@ -33,9 +39,9 @@ def passwordgen(pwLength, noOflettersAndNumbers):
 
     try:
         if int(pwLength) < 6:
-            raise ValueTooSmallException
+            raise ValueTooSmallException("ERROR! The password length should be at least 6 characters long")
         if int(noOflettersAndNumbers) > int(pwLength):
-            raise ValueExceededException
+            raise ValueExceededException("ERROR! The number of letters and digits should not exceed password length")
 
         password_length=int(pwLength)
         nooflettsandnums=int(noOflettersAndNumbers)
@@ -54,12 +60,13 @@ def passwordgen(pwLength, noOflettersAndNumbers):
         password = "".join(passwordList[int(passwordChoice)])
         return password
 
-    except ValueTooSmallException:
-        print("ERROR! The password length should be at least 6 characters long")
-        raise 
-    except ValueExceededException:
-        print("ERROR! The number of letters and digits should not exceed password length")
-        raise  
+    except ValueTooSmallException as exc:
+        print("ValueTooSmallException: {}".format(exc.message))
+        exit()
+         
+    except ValueExceededException as exc:
+        print("ValueExceededException: {}".format(exc.message))
+        exit()
 
 def main():
 
